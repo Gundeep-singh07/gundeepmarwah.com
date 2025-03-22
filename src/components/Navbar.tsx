@@ -31,16 +31,16 @@ const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
 
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'py-3 glass' : 'py-6 bg-transparent'}`}>
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex justify-between items-center">
+      <div className="max-w-full mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex justify-between items-center">
         <a href="#hero" className="text-xl sm:text-2xl font-bold gradient-text">Portfolio</a>
         
-        <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
-          <a href="#about" className="text-foreground hover:text-primary1 transition-colors text-sm lg:text-base">About</a>
-          <a href="#skills" className="text-foreground hover:text-primary1 transition-colors text-sm lg:text-base">Skills</a>
-          <a href="#work" className="text-foreground hover:text-primary1 transition-colors text-sm lg:text-base">Work</a>
-          <a href="#experience" className="text-foreground hover:text-primary1 transition-colors text-sm lg:text-base">Experience</a>
-          <a href="#certifications" className="text-foreground hover:text-primary1 transition-colors text-sm lg:text-base">Certifications</a>
-          <a href="#contact" className="text-foreground hover:text-primary1 transition-colors text-sm lg:text-base">Contact</a>
+        <div className="hidden md:flex items-center space-x-2 lg:space-x-6">
+          <a href="#about" className="text-foreground hover:text-primary1 transition-colors text-xs lg:text-base whitespace-nowrap px-2">About</a>
+          <a href="#skills" className="text-foreground hover:text-primary1 transition-colors text-xs lg:text-base whitespace-nowrap px-2">Skills</a>
+          <a href="#work" className="text-foreground hover:text-primary1 transition-colors text-xs lg:text-base whitespace-nowrap px-2">Work</a>
+          <a href="#experience" className="text-foreground hover:text-primary1 transition-colors text-xs lg:text-base whitespace-nowrap px-2">Experience</a>
+          <a href="#certifications" className="text-foreground hover:text-primary1 transition-colors text-xs lg:text-base whitespace-nowrap px-2">Certifications</a>
+          <a href="#contact" className="text-foreground hover:text-primary1 transition-colors text-xs lg:text-base whitespace-nowrap px-2">Contact</a>
         </div>
         
         <div className="flex items-center space-x-3 sm:space-x-4">

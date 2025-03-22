@@ -1,6 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Mail, Phone, MapPin, Send, Check } from 'lucide-react';
+import { toast } from 'sonner';
 
 const Contact: React.FC = () => {
   const contactRef = useRef<HTMLDivElement>(null);
@@ -72,18 +73,30 @@ const Contact: React.FC = () => {
     setSubmitStatus('loading');
     
     try {
-      // In a real app, you'd call your actual API
-      // For demonstration, let's just log to console
-      console.log('Contact form submitted:', formData);
+      // Call the actual API
+      const response = await fetch('http://localhost:3010/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const data = await response.json();
       
-      setSubmitStatus('success');
-      setStatusMessage('Thank you for contacting me! I\'ll reply to you as soon as possible.');
-      
+      if (data.success) {
+        setSubmitStatus('success');
+        setStatusMessage('Thank you for contacting me! I\'ll reply to you as soon as possible.');
+        toast.success('Message sent successfully!');
+      } else {
+        setSubmitStatus('error');
+        setStatusMessage(data.error || 'Failed to send message. Please try again.');
+        toast.error(data.error || 'Failed to send message');
+      }
     } catch (error) {
       setSubmitStatus('error');
+      setStatusMessage('An error occurred. Please try again later.');
+      toast.error('Failed to connect to server. Please try again later.');
       console.error('Contact form error:', error);
     }
   };

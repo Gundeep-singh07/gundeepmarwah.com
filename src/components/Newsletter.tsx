@@ -1,6 +1,6 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Check, Send, X } from 'lucide-react';
+import { toast } from 'sonner';
 
 const Newsletter: React.FC = () => {
   const newsletterRef = useRef<HTMLDivElement>(null);
@@ -52,36 +52,30 @@ const Newsletter: React.FC = () => {
     setSubmitStatus('loading');
     
     try {
-      // In a real app, you'd call your actual API
-      // For demonstration, let's just log to console
-      console.log(`Subscribing email: ${email}`);
-      
-      // Simulate API call
-      const response = await new Promise<{ success: boolean, message: string }>((resolve) => {
-        setTimeout(() => {
-          // Log to console (this would normally go to your server)
-          console.log('Subscription successful for:', email);
-          
-          // 10% chance of error for demo purposes
-          if (Math.random() < 0.1) {
-            resolve({ success: false, message: "Failed to process subscription" });
-          } else {
-            resolve({ success: true, message: "Subscription successful" });
-          }
-        }, 1500);
+      const response = await fetch('http://localhost:3010/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
       });
       
-      if (response.success) {
+      const data = await response.json();
+      
+      if (data.success) {
         setSubmitStatus('success');
         setStatusMessage('Thank you for subscribing to my newsletter! I\'ll be sending you updates about my new projects and achievements.');
+        toast.success('Successfully subscribed to the newsletter!');
       } else {
         setSubmitStatus('error');
-        setStatusMessage('Subscription failed. Please try again.');
+        setStatusMessage(data.error || 'Subscription failed. Please try again.');
+        toast.error(data.error || 'Subscription failed');
       }
     } catch (error) {
+      console.error('Subscription error:', error);
       setSubmitStatus('error');
       setStatusMessage('An error occurred. Please try again later.');
-      console.error('Subscription error:', error);
+      toast.error('Failed to connect to server. Please try again later.');
     }
   };
 
@@ -209,7 +203,6 @@ const Newsletter: React.FC = () => {
               </div>
             </div>
             
-            {/* Success/Error messages */}
             {statusMessage && (
               <div className={`mt-4 p-3 rounded-lg text-center ${
                 submitStatus === 'success' ? 'bg-green-500/20 text-green-200' : 

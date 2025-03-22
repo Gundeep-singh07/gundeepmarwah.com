@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { Toaster } from 'sonner';
 import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
 import Hero from '@/components/Hero';
@@ -56,7 +57,10 @@ const Index = () => {
   }
 
   return (
-    <div className="relative bg-background min-h-screen">
+    <div className="relative bg-background min-h-screen overflow-x-hidden">
+      {/* Toaster for notifications */}
+      <Toaster position="top-right" />
+      
       {/* Background gradient effects */}
       <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
         <div className="absolute top-0 left-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-primary1/20 rounded-full filter blur-[100px] opacity-30"></div>
