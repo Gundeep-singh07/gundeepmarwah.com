@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center text-white/70">
                 <MapPin size={16} className="mr-2" />
-                <span>Bangalore, India</span>
+                <span>Delhi, India</span>
               </li>
             </ul>
           </div>

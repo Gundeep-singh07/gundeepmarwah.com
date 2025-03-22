@@ -38,9 +38,9 @@ const About: React.FC = () => {
           <h2 className="gradient-text mb-6">About Me</h2>
           <div className="w-20 h-1 bg-primary1 mx-auto mb-8"></div>
           <p className="text-lg text-white/80">
-            As a passionate web developer studying Bachelor of Computer Applications, I'm dedicated to creating 
-            pixel-perfect, functional websites that provide exceptional user experiences. I combine technical skills 
-            with creative problem-solving to build modern and accessible web applications.
+            Hi, I'm Gundeep Marwah, a first-year BCA student at Christ University, currently working in Whalesbook, 
+            passionate about technology and software development. I combine technical skills with creative 
+            problem-solving to build modern and accessible web applications.
           </p>
         </div>
         
@@ -49,16 +49,19 @@ const About: React.FC = () => {
             <h3 className="text-2xl font-bold mb-6 text-primary1">My Journey</h3>
             <div className="space-y-4 text-white/80">
               <p>
-                My fascination with web development began when I created my first HTML page. Since then, 
-                I've been on a continuous learning journey, exploring new technologies and refining my skills.
+                Over the years, I have gained proficiency in various programming languages and tools, including 
+                React, NodeJS, MongoDB, ExpressJS, C, C++, AI/ML, Java, JavaScript, Python, MySQL, HTML, CSS, 
+                Figma and Bootstrap.
               </p>
               <p>
-                As a first-year BCA student at Christ University, I'm building a strong foundation in computer science 
-                while working on real-world projects that challenge me to grow as a developer.
+                My experience is combined with hands-on projects that equipped me with a solid foundation in 
+                software development. I am eager to further develop my skills, contribute to innovative projects, 
+                and collaborate with like-minded individuals in the tech industry.
               </p>
               <p>
-                I believe in clean code, intuitive design, and creating web experiences that are accessible to everyone. 
-                My goal is to contribute to innovative projects that make a positive impact.
+                I am always looking for opportunities to learn and grow, and I am excited about the future of 
+                technology and my place within it. Let's connect and explore how we can work together to create 
+                impactful solutions!
               </p>
             </div>
             
@@ -88,7 +91,7 @@ const About: React.FC = () => {
                 </li>
                 <li className="flex justify-between">
                   <span className="text-white/70">Location:</span>
-                  <span className="font-medium">India</span>
+                  <span className="font-medium">Delhi, India</span>
                 </li>
                 <li className="flex justify-between">
                   <span className="text-white/70">Interests:</span>

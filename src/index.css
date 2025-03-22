@@ -130,4 +130,139 @@
     background-origin: border-box;
     background-clip: padding-box, border-box;
   }
+  
+  /* Improved responsive styling */
+  @media (max-width: 768px) {
+    .section-container {
+      @apply px-4;
+    }
+    
+    h1 {
+      @apply text-3xl;
+    }
+    
+    h2 {
+      @apply text-2xl;
+    }
+    
+    h3 {
+      @apply text-xl;
+    }
+    
+    section {
+      @apply py-12;
+    }
+    
+    .btn-primary, .btn-secondary {
+      @apply px-4 py-2 text-sm;
+    }
+  }
+  
+  /* iPad specific styles */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .section-container {
+      @apply px-8;
+    }
+    
+    .grid {
+      @apply gap-6;
+    }
+  }
+  
+  /* Animation for waving teddy */
+  @keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(15deg); }
+  }
+  
+  .animate-wave {
+    animation: wave 0.5s ease-in-out 4;
+  }
+  
+  /* Animation for success checkmark */
+  @keyframes success-circle {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes checkmark {
+    0% {
+      stroke-dashoffset: 100;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  .animate-success-circle {
+    animation: success-circle 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+  
+  .animate-checkmark {
+    animation: checkmark 0.4s 0.2s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  }
+  
+  /* Scale animation */
+  @keyframes scale {
+    0% { transform: scale(0.8); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  .animate-scale {
+    animation: scale 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+  
+  /* Fade in animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+  }
+  
+  @keyframes fadeInLeft {
+    from { 
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-fade-in-left {
+    animation: fadeInLeft 1s ease-out forwards;
+  }
+  
+  @keyframes fadeInRight {
+    from { 
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-fade-in-right {
+    animation: fadeInRight 1s ease-out forwards;
+  }
+  
+  /* Gradient text animation */
+  @keyframes gradient-text {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .animate-gradient-text {
+    animation: gradient-text 3s ease infinite;
+  }
 }

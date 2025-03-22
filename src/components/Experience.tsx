@@ -15,50 +15,99 @@ interface ExperienceItem {
 const Experience: React.FC = () => {
   const experienceRef = useRef<HTMLDivElement>(null);
   
-  // Sample experience data (replace with your actual experience)
+  // Updated experience data with provided information
   const experiences: ExperienceItem[] = [
     {
       id: 1,
-      position: "Frontend Developer Intern",
-      company: "Tech Innovations Ltd",
-      location: "Remote",
-      period: "Jun 2023 - Aug 2023",
+      position: "Full Stack Developer",
+      company: "Whalesbook",
+      location: "Delhi, India",
+      period: "Jan 2025 - Present",
       description: [
-        "Developed responsive user interfaces using React.js and Tailwind CSS",
-        "Collaborated with the design team to implement pixel-perfect UI components",
-        "Optimized website performance, improving load times by 25%",
-        "Participated in code reviews and implemented feedback from senior developers"
+        "Currently working as a full stack developer",
+        "Working with modern web technologies and frameworks",
+        "Collaborating with team members to deliver high-quality solutions"
       ],
-      technologies: ["React", "JavaScript", "Tailwind CSS", "Git"]
+      technologies: ["React", "NodeJS", "MongoDB", "ExpressJS"]
     },
     {
       id: 2,
-      position: "Freelance Web Developer",
-      company: "Self-employed",
-      location: "Remote",
-      period: "Jan 2023 - Present",
+      position: "Student Trainee (AI/ML)",
+      company: "Intel Corporation",
+      location: "Delhi, India · On-site",
+      period: "Sep 2024 - Present · 7 mos",
       description: [
-        "Designed and developed custom websites for small businesses and individuals",
-        "Created responsive layouts and implemented modern design principles",
-        "Managed client relationships and provided ongoing support and maintenance",
-        "Delivered projects on time and within budget constraints"
+        "Participated in AI/ML training program as an apprentice",
+        "Learned and applied machine learning concepts in real-world scenarios",
+        "Collaborated with team members on AI/ML projects"
       ],
-      technologies: ["HTML5", "CSS3", "JavaScript", "WordPress", "Figma"]
+      technologies: ["AI", "Machine Learning", "Python", "Data Analysis"]
     },
     {
       id: 3,
-      position: "Web Development Teaching Assistant",
-      company: "CodeCamp Academy",
-      location: "Bangalore, India",
-      period: "Sep 2022 - Dec 2022",
+      position: "Member",
+      company: "Under 25 Universe",
+      location: "Delhi, India · On-site",
+      period: "Sep 2024 - Present · 7 mos",
       description: [
-        "Assisted students in understanding fundamental web development concepts",
-        "Provided code reviews and debugging assistance for student projects",
-        "Facilitated lab sessions covering HTML, CSS, and basic JavaScript",
-        "Created supplementary learning materials to aid student comprehension"
+        "Active member of the Under 25 Universe community",
+        "Participated in various community events and initiatives",
+        "Collaborated with other members on creative projects"
       ],
-      technologies: ["HTML", "CSS", "JavaScript", "Teaching", "Mentoring"]
+      technologies: ["Networking", "Community Building", "Event Management"]
     },
+    {
+      id: 4,
+      position: "Team Lead",
+      company: "Cranberri",
+      location: "Delhi, India · Remote",
+      period: "Nov 2024 - Dec 2024 · 2 mos",
+      description: [
+        "Led a team of developers working on web applications",
+        "Managed project timelines and deliverables",
+        "Coordinated with stakeholders to ensure project success"
+      ],
+      technologies: ["Leadership", "Project Management", "Team Coordination"]
+    },
+    {
+      id: 5,
+      position: "Intern",
+      company: "CoderOne",
+      location: "Delhi, India · Remote",
+      period: "Nov 2024 - Jan 2025 · 3 mos",
+      description: [
+        "Worked on web development projects as an intern",
+        "Implemented responsive designs and user interfaces",
+        "Collaborated with senior developers to improve coding skills"
+      ],
+      technologies: ["HTML", "CSS", "JavaScript", "Git"]
+    },
+    {
+      id: 6,
+      position: "Intern",
+      company: "CodSoft",
+      location: "Delhi, India · Remote",
+      period: "Sep 2024 - Oct 2024 · 2 mos",
+      description: [
+        "Participated in coding projects and challenges",
+        "Developed small web applications and features",
+        "Received mentorship from experienced programmers"
+      ],
+      technologies: ["Web Development", "Problem Solving", "Coding"]
+    },
+    {
+      id: 7,
+      position: "EULIM SCIENCE CLUB MEMBER",
+      company: "Christ University, Delhi NCR",
+      location: "Delhi, India · On-site",
+      period: "Aug 2024 - Present · 8 mos",
+      description: [
+        "Active member of the EULIM Science Club at Christ University",
+        "Participated in scientific projects and events",
+        "Collaborated with team members on various initiatives"
+      ],
+      technologies: ["Team Coordination", "Programming", "Marketing", "Project Management", "Creative Strategy", "Team Building"]
+    }
   ];
   
   useEffect(() => {

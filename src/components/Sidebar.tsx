@@ -1,6 +1,6 @@
 
 import React, { useRef, useEffect } from 'react';
-import { X } from 'lucide-react';
+import { X, Mail, Github, Linkedin, Twitter } from 'lucide-react';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -48,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggle }) => {
       {/* Sidebar */}
       <div 
         ref={sidebarRef}
-        className={`fixed top-0 right-0 h-full w-72 z-50 glass transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 h-full w-[85%] sm:w-72 z-50 glass transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -119,6 +119,21 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggle }) => {
               onClick={toggle}
             >
               Contact
+            </a>
+          </div>
+          
+          <div className="mt-6 pt-6 border-t border-white/10 flex justify-center space-x-4">
+            <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors">
+              <Github size={18} />
+            </a>
+            <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors">
+              <Linkedin size={18} />
+            </a>
+            <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors">
+              <Twitter size={18} />
+            </a>
+            <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors">
+              <Mail size={18} />
             </a>
           </div>
           

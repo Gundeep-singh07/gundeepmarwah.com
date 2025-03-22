@@ -17,6 +17,7 @@ const Contact: React.FC = () => {
     message: false
   });
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [statusMessage, setStatusMessage] = useState('');
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -51,7 +52,7 @@ const Contact: React.FC = () => {
     setFormErrors(prev => ({ ...prev, [name]: false }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validate form
@@ -70,12 +71,21 @@ const Contact: React.FC = () => {
     
     setSubmitStatus('loading');
     
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitStatus('success');
-      // Would normally send a thank you email here via backend
+    try {
+      // In a real app, you'd call your actual API
+      // For demonstration, let's just log to console
       console.log('Contact form submitted:', formData);
-    }, 1500);
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      setSubmitStatus('success');
+      setStatusMessage('Thank you for contacting me! I\'ll reply to you as soon as possible.');
+      
+    } catch (error) {
+      setSubmitStatus('error');
+      console.error('Contact form error:', error);
+    }
   };
 
   return (
@@ -130,7 +140,7 @@ const Contact: React.FC = () => {
                   <MapPin size={20} />
                 </div>
                 <h3 className="text-xl font-bold mb-2">Location</h3>
-                <p className="text-white/80">Bangalore, India</p>
+                <p className="text-white/80">Delhi, India</p>
                 <a 
                   href="https://maps.google.com" 
                   target="_blank" 
@@ -160,6 +170,7 @@ const Contact: React.FC = () => {
                     onClick={() => {
                       setSubmitStatus('idle');
                       setFormData({ name: '', email: '', subject: '', message: '' });
+                      setStatusMessage('');
                     }}
                     className="btn-primary mx-auto"
                   >
@@ -241,6 +252,13 @@ const Contact: React.FC = () => {
                       <p className="text-red-500 text-sm mt-1">Message is required</p>
                     )}
                   </div>
+                  
+                  {/* Status message */}
+                  {statusMessage && (
+                    <div className="mb-6 p-3 rounded-lg text-center bg-opacity-20 bg-green-500/20 text-green-200">
+                      {statusMessage}
+                    </div>
+                  )}
                   
                   <div>
                     {submitStatus === 'idle' && (

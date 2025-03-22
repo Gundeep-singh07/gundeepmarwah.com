@@ -7,6 +7,7 @@ const Newsletter: React.FC = () => {
   const [email, setEmail] = useState('');
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [isValid, setIsValid] = useState(true);
+  const [statusMessage, setStatusMessage] = useState('');
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,7 +41,7 @@ const Newsletter: React.FC = () => {
     setIsValid(true);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateEmail(email)) {
@@ -50,21 +51,43 @@ const Newsletter: React.FC = () => {
     
     setSubmitStatus('loading');
     
-    // Simulate API call
-    setTimeout(() => {
-      // 10% chance of error for demo purposes
-      if (Math.random() < 0.1) {
-        setSubmitStatus('error');
-      } else {
+    try {
+      // In a real app, you'd call your actual API
+      // For demonstration, let's just log to console
+      console.log(`Subscribing email: ${email}`);
+      
+      // Simulate API call
+      const response = await new Promise<{ success: boolean, message: string }>((resolve) => {
+        setTimeout(() => {
+          // Log to console (this would normally go to your server)
+          console.log('Subscription successful for:', email);
+          
+          // 10% chance of error for demo purposes
+          if (Math.random() < 0.1) {
+            resolve({ success: false, message: "Failed to process subscription" });
+          } else {
+            resolve({ success: true, message: "Subscription successful" });
+          }
+        }, 1500);
+      });
+      
+      if (response.success) {
         setSubmitStatus('success');
-        // Would normally send a thank you email here via backend
-        console.log('Subscription successful for:', email);
+        setStatusMessage('Thank you for subscribing to my newsletter! I\'ll be sending you updates about my new projects and achievements.');
+      } else {
+        setSubmitStatus('error');
+        setStatusMessage('Subscription failed. Please try again.');
       }
-    }, 1500);
+    } catch (error) {
+      setSubmitStatus('error');
+      setStatusMessage('An error occurred. Please try again later.');
+      console.error('Subscription error:', error);
+    }
   };
 
   const handleRetry = () => {
     setSubmitStatus('idle');
+    setStatusMessage('');
   };
 
   return (
@@ -185,6 +208,16 @@ const Newsletter: React.FC = () => {
                 )}
               </div>
             </div>
+            
+            {/* Success/Error messages */}
+            {statusMessage && (
+              <div className={`mt-4 p-3 rounded-lg text-center ${
+                submitStatus === 'success' ? 'bg-green-500/20 text-green-200' : 
+                submitStatus === 'error' ? 'bg-red-500/20 text-red-200' : ''
+              }`}>
+                {statusMessage}
+              </div>
+            )}
           </form>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

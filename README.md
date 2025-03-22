@@ -1,69 +1,95 @@
-# Welcome to your Lovable project
 
-## Project info
+# Gundeep Marwah Portfolio
 
-**URL**: https://lovable.dev/projects/bb83ebdd-1183-4ceb-8ed9-3c4cba6f4b2b
+A modern, responsive portfolio website built with React and Tailwind CSS.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- Responsive design that works well on desktop, tablet, and mobile devices
+- Dark mode theme with custom gradient animations
+- Interactive UI components with smooth animations
+- Newsletter subscription functionality
+- Contact form with email notifications
+- Sidebar navigation for mobile devices
 
-**Use Lovable**
+## Getting Started
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/bb83ebdd-1183-4ceb-8ed9-3c4cba6f4b2b) and start prompting.
+### Prerequisites
 
-Changes made via Lovable will be committed automatically to this repo.
+- Node.js (v14 or higher)
+- npm or yarn
 
-**Use your preferred IDE**
+### Installation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/portfolio.git
+   cd portfolio
+   ```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-Follow these steps:
+3. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Setting up the Backend Server
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. Navigate to the server directory:
+   ```bash
+   cd src/server
+   ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+2. Install server dependencies:
+   ```bash
+   npm install
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+3. Create a `.env` file in the server directory with the following content:
+   ```
+   PORT=3010
+   EMAIL_USER=your-email@gmail.com
+   EMAIL_PASSWORD=your-app-password
+   NODE_ENV=development
+   ```
+
+   Note: For Gmail, you'll need to use an App Password. See [Google's documentation](https://support.google.com/accounts/answer/185833) for instructions.
+
+4. Start the server:
+   ```bash
+   npm start
+   # or for development with auto-restart:
+   npm run dev
+   ```
+
+## Deployment
+
+To build the project for production:
+
+```bash
+npm run build
+# or
+yarn build
 ```
 
-**Edit a file directly in GitHub**
+The build artifacts will be stored in the `dist/` directory.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Technologies Used
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
+- React.js
 - Tailwind CSS
+- Node.js
+- Express
+- Nodemailer
 
-## How can I deploy this project?
+## License
 
-Simply open [Lovable](https://lovable.dev/projects/bb83ebdd-1183-4ceb-8ed9-3c4cba6f4b2b) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+This project is licensed under the MIT License - see the LICENSE file for details.
