@@ -1,6 +1,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import { X, Mail, Github, Linkedin, Twitter } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -9,6 +10,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggle }) => {
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   // Close sidebar when clicking outside
   useEffect(() => {
@@ -35,6 +37,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggle }) => {
     };
   }, [isOpen]);
 
+  const sidebarWidth = isMobile ? '85vw' : '300px';
+
   return (
     <>
       {/* Overlay */}
@@ -48,22 +52,21 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggle }) => {
       {/* Sidebar */}
       <div 
         ref={sidebarRef}
-        className={`fixed top-0 right-0 h-full w-[85%] sm:w-72 z-50 glass transform transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        style={{ width: isOpen ? sidebarWidth : '0', maxWidth: '100vw' }}
+        className={`fixed top-0 right-0 h-full z-50 glass transform transition-all duration-300 ease-in-out overflow-hidden`}
       >
-        <div className="p-6 h-full flex flex-col">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-xl font-bold gradient-text">Menu</h2>
+        <div className="p-4 sm:p-6 h-full flex flex-col overflow-y-auto">
+          <div className="flex justify-between items-center mb-6 sm:mb-8">
+            <h2 className="text-lg sm:text-xl font-bold gradient-text">Menu</h2>
             <button 
               onClick={toggle}
-              className="w-10 h-10 rounded-full bg-primary1 flex items-center justify-center"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary1 flex items-center justify-center"
             >
-              <X size={18} />
+              <X size={16} className="sm:size-18" />
             </button>
           </div>
           
-          <div className="flex flex-col space-y-6 text-lg">
+          <div className="flex flex-col space-y-4 sm:space-y-6 text-base sm:text-lg">
             <a 
               href="#hero" 
               className="hover:text-primary1 transition-colors pb-2 border-b border-white/10"
@@ -123,28 +126,28 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggle }) => {
           </div>
           
           <div className="mt-6 pt-6 border-t border-white/10 flex justify-center space-x-4">
-            <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors">
-              <Github size={18} />
+            <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors">
+              <Github size={16} className="sm:size-18" />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors">
-              <Linkedin size={18} />
+            <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors">
+              <Linkedin size={16} className="sm:size-18" />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors">
-              <Twitter size={18} />
+            <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors">
+              <Twitter size={16} className="sm:size-18" />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors">
-              <Mail size={18} />
+            <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors">
+              <Mail size={16} className="sm:size-18" />
             </a>
           </div>
           
-          <div className="mt-auto fancy-border-gradient p-4 rounded-lg">
-            <p className="text-sm text-white/80">
+          <div className="mt-auto fancy-border-gradient p-3 sm:p-4 rounded-lg">
+            <p className="text-xs sm:text-sm text-white/80">
               Let's work together to build something amazing! Reach out to me for collaboration opportunities.
             </p>
             <a 
               href="#contact"
               onClick={toggle}
-              className="btn-primary mt-4 w-full"
+              className="btn-primary mt-3 sm:mt-4 w-full text-sm"
             >
               Contact Me
             </a>
