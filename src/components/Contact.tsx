@@ -1,40 +1,43 @@
+import React, { useEffect, useRef, useState } from "react";
+import { Mail, Phone, MapPin, Send, Check } from "lucide-react";
+import { toast } from "sonner";
 
-import React, { useEffect, useRef, useState } from 'react';
-import { Mail, Phone, MapPin, Send, Check } from 'lucide-react';
-import { toast } from 'sonner';
+import { Download, Github, Linkedin, Twitter } from "lucide-react";
 
 const Contact: React.FC = () => {
   const contactRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
   const [formErrors, setFormErrors] = useState({
     name: false,
     email: false,
     subject: false,
-    message: false
+    message: false,
   });
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [statusMessage, setStatusMessage] = useState('');
-  
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [statusMessage, setStatusMessage] = useState("");
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100');
-          entry.target.classList.remove('opacity-0');
+          entry.target.classList.add("opacity-100");
+          entry.target.classList.remove("opacity-0");
         }
       },
       { threshold: 0.1 }
     );
-    
+
     if (contactRef.current) {
       observer.observe(contactRef.current);
     }
-    
+
     return () => {
       if (contactRef.current) {
         observer.unobserve(contactRef.current);
@@ -43,67 +46,74 @@ const Contact: React.FC = () => {
   }, []);
 
   const validateEmail = (email: string) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    setFormErrors(prev => ({ ...prev, [name]: false }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormErrors((prev) => ({ ...prev, [name]: false }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate form
     const newErrors = {
       name: !formData.name,
       email: !formData.email || !validateEmail(formData.email),
       subject: !formData.subject,
-      message: !formData.message
+      message: !formData.message,
     };
-    
+
     setFormErrors(newErrors);
-    
-    if (Object.values(newErrors).some(error => error)) {
+
+    if (Object.values(newErrors).some((error) => error)) {
       return;
     }
-    
-    setSubmitStatus('loading');
-    
+
+    setSubmitStatus("loading");
+
     try {
       // Call the actual API
-      const response = await fetch('http://localhost:3010/api/contact', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3010/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-      
+
       const data = await response.json();
-      
+
       if (data.success) {
-        setSubmitStatus('success');
-        setStatusMessage('Thank you for contacting me! I\'ll reply to you as soon as possible.');
-        toast.success('Message sent successfully!');
+        setSubmitStatus("success");
+        setStatusMessage(
+          "Thank you for contacting me! I'll reply to you as soon as possible."
+        );
+        toast.success("Message sent successfully!");
       } else {
-        setSubmitStatus('error');
-        setStatusMessage(data.error || 'Failed to send message. Please try again.');
-        toast.error(data.error || 'Failed to send message');
+        setSubmitStatus("error");
+        setStatusMessage(
+          data.error || "Failed to send message. Please try again."
+        );
+        toast.error(data.error || "Failed to send message");
       }
     } catch (error) {
-      setSubmitStatus('error');
-      setStatusMessage('An error occurred. Please try again later.');
-      toast.error('Failed to connect to server. Please try again later.');
-      console.error('Contact form error:', error);
+      setSubmitStatus("error");
+      setStatusMessage("An error occurred. Please try again later.");
+      toast.error("Failed to connect to server. Please try again later.");
+      console.error("Contact form error:", error);
     }
   };
 
   return (
-    <section 
-      id="contact" 
+    <section
+      id="contact"
       ref={contactRef}
       className="py-20 transition-opacity duration-700 opacity-0"
     >
@@ -112,11 +122,12 @@ const Contact: React.FC = () => {
           <h2 className="gradient-text mb-6">Contact Me</h2>
           <div className="w-20 h-1 bg-primary1 mx-auto mb-8"></div>
           <p className="text-lg text-white/80">
-            Have a project in mind or just want to connect? Feel free to reach out to me.
-            I'm always open to discussing new projects, creative ideas, and opportunities.
+            Have a project in mind or just want to connect? Feel free to reach
+            out to me. I'm always open to discussing new projects, creative
+            ideas, and opportunities.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1">
             <div className="space-y-6 animate-fade-in-left">
@@ -125,38 +136,38 @@ const Contact: React.FC = () => {
                   <Mail size={20} />
                 </div>
                 <h3 className="text-xl font-bold mb-2">Email</h3>
-                <p className="text-white/80">gundeep.marwah@example.com</p>
-                <a 
-                  href="mailto:gundeep.marwah@example.com" 
+                <p className="text-white/80">work.gundeep@gmail.com</p>
+                <a
+                  href="mailto:work.gundeep@gmail.com"
                   className="text-primary1 inline-block mt-2 hover:underline"
                 >
                   Send a message
                 </a>
               </div>
-              
+
               <div className="glass p-6 rounded-xl hover:translate-y-[-4px] transition-transform duration-300">
                 <div className="w-12 h-12 rounded-full glass flex items-center justify-center text-primary1 mb-4">
                   <Phone size={20} />
                 </div>
                 <h3 className="text-xl font-bold mb-2">Phone</h3>
-                <p className="text-white/80">+91 98765 43210</p>
-                <a 
-                  href="tel:+919876543210" 
+                <p className="text-white/80">+91 78388 86857</p>
+                <a
+                  href="tel:+917838886857"
                   className="text-primary1 inline-block mt-2 hover:underline"
                 >
                   Call me
                 </a>
               </div>
-              
+
               <div className="glass p-6 rounded-xl hover:translate-y-[-4px] transition-transform duration-300">
                 <div className="w-12 h-12 rounded-full glass flex items-center justify-center text-primary1 mb-4">
                   <MapPin size={20} />
                 </div>
                 <h3 className="text-xl font-bold mb-2">Location</h3>
                 <p className="text-white/80">Delhi, India</p>
-                <a 
-                  href="https://maps.google.com" 
-                  target="_blank" 
+                <a
+                  href="https://maps.google.com"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary1 inline-block mt-2 hover:underline"
                 >
@@ -165,25 +176,31 @@ const Contact: React.FC = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="lg:col-span-2 animate-fade-in-right">
             <div className="glass p-8 rounded-xl">
               <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
-              
-              {submitStatus === 'success' ? (
+
+              {submitStatus === "success" ? (
                 <div className="text-center py-12">
                   <div className="w-20 h-20 rounded-full glass flex items-center justify-center text-green-500 mx-auto mb-6">
                     <Check size={32} />
                   </div>
                   <h4 className="text-xl font-bold mb-2">Message Sent!</h4>
                   <p className="text-white/80 mb-6">
-                    Thank you for reaching out. I'll get back to you as soon as possible.
+                    Thank you for reaching out. I'll get back to you as soon as
+                    possible.
                   </p>
-                  <button 
+                  <button
                     onClick={() => {
-                      setSubmitStatus('idle');
-                      setFormData({ name: '', email: '', subject: '', message: '' });
-                      setStatusMessage('');
+                      setSubmitStatus("idle");
+                      setFormData({
+                        name: "",
+                        email: "",
+                        subject: "",
+                        message: "",
+                      });
+                      setStatusMessage("");
                     }}
                     className="btn-primary mx-auto"
                   >
@@ -194,98 +211,134 @@ const Contact: React.FC = () => {
                 <form onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                      <label htmlFor="name" className="block text-white/80 mb-2">Name</label>
-                      <input 
-                        type="text" 
+                      <label
+                        htmlFor="name"
+                        className="block text-white/80 mb-2"
+                      >
+                        Name
+                      </label>
+                      <input
+                        type="text"
                         id="name"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
                         className={`w-full px-4 py-3 bg-white/5 rounded-lg outline-none border ${
-                          formErrors.name ? 'border-red-500' : 'border-white/10 focus:border-primary1'
+                          formErrors.name
+                            ? "border-red-500"
+                            : "border-white/10 focus:border-primary1"
                         } transition-colors`}
-                        disabled={submitStatus === 'loading'}
+                        disabled={submitStatus === "loading"}
                       />
                       {formErrors.name && (
-                        <p className="text-red-500 text-sm mt-1">Name is required</p>
+                        <p className="text-red-500 text-sm mt-1">
+                          Name is required
+                        </p>
                       )}
                     </div>
-                    
+
                     <div>
-                      <label htmlFor="email" className="block text-white/80 mb-2">Email</label>
-                      <input 
-                        type="email" 
+                      <label
+                        htmlFor="email"
+                        className="block text-white/80 mb-2"
+                      >
+                        Email
+                      </label>
+                      <input
+                        type="email"
                         id="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
                         className={`w-full px-4 py-3 bg-white/5 rounded-lg outline-none border ${
-                          formErrors.email ? 'border-red-500' : 'border-white/10 focus:border-primary1'
+                          formErrors.email
+                            ? "border-red-500"
+                            : "border-white/10 focus:border-primary1"
                         } transition-colors`}
-                        disabled={submitStatus === 'loading'}
+                        disabled={submitStatus === "loading"}
                       />
                       {formErrors.email && (
-                        <p className="text-red-500 text-sm mt-1">Valid email is required</p>
+                        <p className="text-red-500 text-sm mt-1">
+                          Valid email is required
+                        </p>
                       )}
                     </div>
                   </div>
-                  
+
                   <div className="mb-6">
-                    <label htmlFor="subject" className="block text-white/80 mb-2">Subject</label>
-                    <input 
-                      type="text" 
+                    <label
+                      htmlFor="subject"
+                      className="block text-white/80 mb-2"
+                    >
+                      Subject
+                    </label>
+                    <input
+                      type="text"
                       id="subject"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
                       className={`w-full px-4 py-3 bg-white/5 rounded-lg outline-none border ${
-                        formErrors.subject ? 'border-red-500' : 'border-white/10 focus:border-primary1'
+                        formErrors.subject
+                          ? "border-red-500"
+                          : "border-white/10 focus:border-primary1"
                       } transition-colors`}
-                      disabled={submitStatus === 'loading'}
+                      disabled={submitStatus === "loading"}
                     />
                     {formErrors.subject && (
-                      <p className="text-red-500 text-sm mt-1">Subject is required</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        Subject is required
+                      </p>
                     )}
                   </div>
-                  
+
                   <div className="mb-6">
-                    <label htmlFor="message" className="block text-white/80 mb-2">Message</label>
-                    <textarea 
+                    <label
+                      htmlFor="message"
+                      className="block text-white/80 mb-2"
+                    >
+                      Message
+                    </label>
+                    <textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       rows={5}
                       className={`w-full px-4 py-3 bg-white/5 rounded-lg outline-none border ${
-                        formErrors.message ? 'border-red-500' : 'border-white/10 focus:border-primary1'
+                        formErrors.message
+                          ? "border-red-500"
+                          : "border-white/10 focus:border-primary1"
                       } transition-colors resize-none`}
-                      disabled={submitStatus === 'loading'}
+                      disabled={submitStatus === "loading"}
                     ></textarea>
                     {formErrors.message && (
-                      <p className="text-red-500 text-sm mt-1">Message is required</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        Message is required
+                      </p>
                     )}
                   </div>
-                  
+
                   {/* Status message */}
                   {statusMessage && (
                     <div className="mb-6 p-3 rounded-lg text-center bg-opacity-20 bg-green-500/20 text-green-200">
                       {statusMessage}
                     </div>
                   )}
-                  
+
                   <div>
-                    {submitStatus === 'idle' && (
-                      <button 
-                        type="submit" 
+                    {submitStatus === "idle" && (
+                      <button
+                        type="submit"
                         className="btn-primary w-full md:w-auto"
                       >
                         <span className="mr-2">Send Message</span>
                         <Send size={18} />
                       </button>
                     )}
-                    
-                    {submitStatus === 'loading' && (
-                      <button 
+
+                    {submitStatus === "loading" && (
+                      <button
                         disabled
                         className="w-full md:w-auto px-6 py-3 bg-primary1/70 text-white rounded-full flex items-center justify-center"
                       >
@@ -296,6 +349,36 @@ const Contact: React.FC = () => {
                   </div>
                 </form>
               )}
+            </div>
+          </div>
+
+          <div className="glass p-6 rounded-2xl">
+            <h3 className="text-xl font-bold mb-4 text-primary1">
+              Connect With Me
+            </h3>
+            <div className="flex justify-around">
+              <a
+                href="https://github.com/Gundeep-singh07"
+                target="_blank"
+                className="w-12 h-12 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors"
+              >
+                <Github size={20} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/gundeep-marwah/"
+                target="_blank"
+                className="w-12 h-12 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors"
+              >
+                <Linkedin size={20} />
+              </a>
+
+              <a
+                href="mailto:work.gundeep@gmail.com"
+                target="_blank"
+                className="w-12 h-12 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors"
+              >
+                <Mail size={20} />
+              </a>
             </div>
           </div>
         </div>
