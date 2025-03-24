@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Mail, Phone, MapPin, Send, Check } from "lucide-react";
 import { toast } from "sonner";
 
-import { Download, Github, Linkedin, Twitter } from "lucide-react";
-
 const Contact: React.FC = () => {
   const contactRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
@@ -45,6 +43,13 @@ const Contact: React.FC = () => {
     };
   }, []);
 
+  const getApiUrl = () => {
+    if (window.location.hostname === "localhost") {
+      return "http://localhost:3010/api/contact";
+    }
+    return "https://portfolio-server-u8ym.onrender.com/api/contact";
+  };
+
   const validateEmail = (email: string) => {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -62,7 +67,6 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate form
     const newErrors = {
       name: !formData.name,
       email: !formData.email || !validateEmail(formData.email),
@@ -79,8 +83,7 @@ const Contact: React.FC = () => {
     setSubmitStatus("loading");
 
     try {
-      // Call the actual API
-      const response = await fetch("http://localhost:3010/api/contact", {
+      const response = await fetch(getApiUrl(), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -136,9 +139,9 @@ const Contact: React.FC = () => {
                   <Mail size={20} />
                 </div>
                 <h3 className="text-xl font-bold mb-2">Email</h3>
-                <p className="text-white/80">work.gundeep@gmail.com</p>
+                <p className="text-white/80">gundeep.marwah@example.com</p>
                 <a
-                  href="mailto:work.gundeep@gmail.com"
+                  href="mailto:gundeep.marwah@example.com"
                   className="text-primary1 inline-block mt-2 hover:underline"
                 >
                   Send a message
@@ -150,9 +153,9 @@ const Contact: React.FC = () => {
                   <Phone size={20} />
                 </div>
                 <h3 className="text-xl font-bold mb-2">Phone</h3>
-                <p className="text-white/80">+91 78388 86857</p>
+                <p className="text-white/80">+91 98765 43210</p>
                 <a
-                  href="tel:+917838886857"
+                  href="tel:+919876543210"
                   className="text-primary1 inline-block mt-2 hover:underline"
                 >
                   Call me
@@ -319,7 +322,6 @@ const Contact: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Status message */}
                   {statusMessage && (
                     <div className="mb-6 p-3 rounded-lg text-center bg-opacity-20 bg-green-500/20 text-green-200">
                       {statusMessage}
@@ -349,36 +351,6 @@ const Contact: React.FC = () => {
                   </div>
                 </form>
               )}
-            </div>
-          </div>
-
-          <div className="glass p-6 rounded-2xl">
-            <h3 className="text-xl font-bold mb-4 text-primary1">
-              Connect With Me
-            </h3>
-            <div className="flex justify-around">
-              <a
-                href="https://github.com/Gundeep-singh07"
-                target="_blank"
-                className="w-12 h-12 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors"
-              >
-                <Github size={20} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/gundeep-marwah/"
-                target="_blank"
-                className="w-12 h-12 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors"
-              >
-                <Linkedin size={20} />
-              </a>
-
-              <a
-                href="mailto:work.gundeep@gmail.com"
-                target="_blank"
-                className="w-12 h-12 rounded-full glass flex items-center justify-center text-white/80 hover:text-primary1 transition-colors"
-              >
-                <Mail size={20} />
-              </a>
             </div>
           </div>
         </div>

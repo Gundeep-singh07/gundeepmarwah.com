@@ -5,7 +5,6 @@ import { toast } from "sonner";
 const Newsletter: React.FC = () => {
   const newsletterRef = useRef<HTMLDivElement>(null);
   const [email, setEmail] = useState("");
-
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "loading" | "success" | "error" | "retrying"
   >("idle");
@@ -46,6 +45,13 @@ const Newsletter: React.FC = () => {
     setIsValid(true);
   };
 
+  const getApiUrl = () => {
+    if (window.location.hostname === "localhost") {
+      return "http://localhost:3010/api/subscribe";
+    }
+    return "https://portfolio-server-u8ym.onrender.com/api/subscribe";
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -57,7 +63,7 @@ const Newsletter: React.FC = () => {
     setSubmitStatus("loading");
 
     try {
-      const response = await fetch("http://localhost:3010/api/subscribe", {
+      const response = await fetch(getApiUrl(), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -73,7 +79,6 @@ const Newsletter: React.FC = () => {
           "Thank you for subscribing to my newsletter! I'll be sending you updates about my new projects and achievements."
         );
         toast.success("Successfully subscribed to the newsletter!");
-
         setRetryCount(0);
       } else {
         setSubmitStatus("error");
@@ -87,6 +92,7 @@ const Newsletter: React.FC = () => {
       setStatusMessage("An error occurred. Please try again later.");
     }
   };
+
   const handleRetry = async () => {
     const newRetryCount = retryCount + 1;
     setRetryCount(newRetryCount);
@@ -99,7 +105,7 @@ const Newsletter: React.FC = () => {
     setSubmitStatus("retrying");
 
     try {
-      const response = await fetch("http://localhost:3010/api/subscribe", {
+      const response = await fetch(getApiUrl(), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
