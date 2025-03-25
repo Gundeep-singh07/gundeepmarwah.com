@@ -295,47 +295,40 @@ const Newsletter: React.FC = () => {
           </form>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="glass rounded-xl p-6 text-center">
-              <div className="mb-4 flex justify-center">
-                <img
-                  src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4e8.svg"
-                  alt="Weekly Updates"
-                  className="w-12 h-12"
-                />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Weekly Updates</h3>
-              <p className="text-sm text-white/70">
-                Receive curated content about the latest in web development
-              </p>
-            </div>
+            {["Weekly Updates", "Exclusive Insights", "Early Access"].map(
+              (title, index) => {
+                const icons = [
+                  "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4e8.svg",
+                  "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f50d.svg",
+                  "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f680.svg",
+                ];
 
-            <div className="glass rounded-xl p-6 text-center">
-              <div className="mb-4 flex justify-center">
-                <img
-                  src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f50d.svg"
-                  alt="Exclusive Insights"
-                  className="w-12 h-12"
-                />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Exclusive Insights</h3>
-              <p className="text-sm text-white/70">
-                Get behind-the-scenes details about my projects and process
-              </p>
-            </div>
+                const descriptions = [
+                  "Receive curated content about the latest in web development",
+                  "Get behind-the-scenes details about my projects and process",
+                  "Be the first to know about new projects and opportunities",
+                ];
 
-            <div className="glass rounded-xl p-6 text-center">
-              <div className="mb-4 flex justify-center">
-                <img
-                  src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f680.svg"
-                  alt="Early Access"
-                  className="w-12 h-12"
-                />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Early Access</h3>
-              <p className="text-sm text-white/70">
-                Be the first to know about new projects and opportunities
-              </p>
-            </div>
+                return (
+                  <div
+                    key={`newsletter-feature-${index}`}
+                    className="glass rounded-xl p-6 text-center"
+                  >
+                    <div className="mb-4 flex justify-center">
+                      <img
+                        src={icons[index]}
+                        alt={title}
+                        className="w-12 h-12"
+                      />
+                    </div>
+                    <h3 className="text-lg font-bold mb-2">{title}</h3>
+                    <p className="text-sm text-white/70">
+                      {descriptions[index]}
+                    </p>
+                  </div>
+                );
+              }
+            )}
           </div>
         </div>
       </div>
