@@ -139,7 +139,7 @@ const Contact: React.FC = () => {
                   <Mail size={20} />
                 </div>
                 <h3 className="text-xl font-bold mb-2">Email</h3>
-                <p className="text-white/80">gundeep.marwah@example.com</p>
+                <p className="text-white/80">work.gundeep@gmail.com</p>
                 <a
                   href="mailto:gundeep.marwah@example.com"
                   className="text-primary1 inline-block mt-2 hover:underline"
