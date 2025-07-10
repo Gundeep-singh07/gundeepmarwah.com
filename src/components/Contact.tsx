@@ -153,7 +153,7 @@ const Contact: React.FC = () => {
                   <Phone size={20} />
                 </div>
                 <h3 className="text-xl font-bold mb-2">Phone</h3>
-                <p className="text-white/80">+91 98765 43210</p>
+                <p className="text-white/80">+91 78388 86857</p>
                 <a
                   href="tel:+919876543210"
                   className="text-primary1 inline-block mt-2 hover:underline"
