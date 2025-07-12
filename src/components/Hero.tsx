@@ -46,13 +46,13 @@ const Hero: React.FC = () => {
             </h1>
 
             <h2 className="text-3xl font-bold text-primary1 animate-fade-in animate-delay-100">
-              Web Developer
+              App & Web Developer
             </h2>
 
             <p className="text-lg text-white/80 max-w-xl animate-fade-in animate-delay-200">
-              I'm a first-year BCA student at Christ University, passionate
-              about creating beautiful, responsive websites with modern
-              technologies and building exceptional digital experiences.
+              I'm a second-year BCA student at Christ University, passionate
+              about creating beautiful, responsive Applications & websites with
+              modern technologies and building exceptional digital experiences.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4 animate-fade-in animate-delay-300">
