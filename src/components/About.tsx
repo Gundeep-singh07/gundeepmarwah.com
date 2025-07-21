@@ -39,7 +39,7 @@ const About: React.FC = () => {
           <div className="w-20 h-1 bg-primary1 mx-auto mb-8"></div>
           <p className="text-lg text-white/80">
             Hi, I'm Gundeep Marwah, a second-year BCA student at Christ
-            University, currently working in Whalesbook, passionate about
+            University, currently building real-world projects, passionate about
             technology and software development. I combine technical skills with
             creative problem-solving to build modern and accessible web
             applications.
